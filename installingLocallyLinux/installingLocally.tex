@@ -1,0 +1,72 @@
+\documentclass{ximera}
+\title{Installing locally: Linux}
+
+\begin{document}
+\begin{abstract}
+Instructions for installing Ximera locally.
+\end{abstract}
+\maketitle
+
+
+
+\section{Install ximeraLaTeX}
+
+\section{For Linux}
+
+Use git to clone the repo with:
+
+\begin{verbatim}
+git clone https://github.com/XimeraProject/ximeraLatex.git
+\end{verbatim}
+
+Create the directory structure:
+
+\begin{verbatim}
+~/texmf/tex/latex/
+\end{verbatim}
+
+and move \verb|ximeraLatex| to \verb|~/texmf/tex/latex/|. This will allow all of
+your documents to find \verb|ximera.cls|
+
+
+
+\section{Install xake}
+
+Xake is Ximera's version of ``make'' and it converts the
+\LaTeX\ source into HTML.
+
+\subsection{Installing xake on Arch}
+
+\verb!yaourt -S xake-git! should work assuming you use \texttt{yaourt}.
+
+  
+\subsection{Installing xake on Ubuntu}
+
+Download the \verb|.deb| file from here:
+
+\link{https://github.com/XimeraProject/xake/releases}
+
+Then in the directory, do
+
+\begin{verbatim}
+sudo apt install ./xake_0.9.2_amd64.deb.deb
+\end{verbatim}
+
+where the \verb|0.9.2| will be replaced with the version of the
+\verb|.deb| file you have downloaded.
+
+If you want to rely on Ximera's ability to convert TikZ directly to SVGs, then you will need to install a couple other tools,
+\begin{verbatim}
+sudo apt-get install mupdf-tools
+sudo apt-get install pdf2svg
+\end{verbatim}
+
+\subsection{Installing xake on Red Hat}
+
+Download the \verb|.rpm| file from here:
+
+\link{https://github.com/XimeraProject/xake/releases}
+
+And install as usual.  You will also want to install \verb|mutool| and \verb|pdf2svg|.
+
+\end{document}

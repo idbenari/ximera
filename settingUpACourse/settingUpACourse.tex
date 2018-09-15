@@ -1,0 +1,234 @@
+\documentclass{ximera}
+%\def\sectionautorefname~#1\null{\S#1\null}
+%\def\subsectionautorefname~#1\null{\S#1\null}
+\title{Setting up a course}
+%\def\itemautorefname~#1\null{#1\null}
+\begin{document}
+\begin{abstract}
+Instructions for setting up a course.
+\end{abstract}
+\maketitle
+
+
+\subsection{Setting up a Ximera course}
+
+
+
+Now that you can create a course. A
+\link[Ximera]{http://ximera.osu.edu} course consists of a directory
+(\verb!anExampleCourse!)  containing a set of directories
+(\verb!theFirstActivity!, \verb!theSecondActivity!) that all contain
+\LaTeX\ files using the \verb!ximera! document class. This directory
+also contains one or more \LaTeX\ files using the \verb!xourse!
+document class, each of which is a launch page for the activities in
+the course(s). This section describes how to create a course.
+\begin{enumerate}
+
+     
+\item\label{Mkdir} 
+In this example, we will create a directory called
+\verb!anExampleCourse! that contains a directory called \verb!theFirstActivity!. We will also create the \verb!anExampleCourse.tex! file.
+Open a terminal session and type the following commands to do that.
+\begin{verbatim}
+mkdir anExampleCourse
+cd anExampleCourse 
+mkdir theFirstActivity
+touch anExampleCourse.tex
+\end{verbatim}
+
+\item Next we will modify the \verb!anExampleCourse.tex! file in the (\verb!anExampleCourse!) directory. Click ``Files," click on the (\verb!xandbox!) directory and click on the  (\verb!anExampleCourse!) directory, then click the file \verb!anExampleCourse.tex!. Copy and paste the following in the left-hand side of the window and click ``Save." It may complain that you haven't created the \verb!theFirstActivity.tex! file yet, but that's fine.
+
+    
+
+\begin{verbatim}
+\documentclass{xourse}
+
+\title{An example course}
+%% This is the Name of your course 
+%% personalize it
+
+\begin{document}
+\begin{abstract} %% This describes your course
+This is a Ximera activity explaining how to get started with Ximera for course instructors.
+\end{abstract}
+\maketitle
+
+%% Here we have a listing of the activities. 
+\activity{theFirstActivity/theFirstActivity}
+
+\end{document}
+\end{verbatim}
+
+Now return to the terminal window, which should still be in the directory \verb!theExampleCourse!. You need to add the file (and the directory containing it) to git and commit your changes, and also tell it who you are. \begin{verbatim}
+
+git add anExampleCourse.tex
+git commit -m "this is my first course"
+\end{verbatim}
+
+Every time you add or change files, you will need to run \verb!git add! and \verb!git commit -m "short description of changes"! to commit the changes to the server. The description of changes is necessary to commit, as is the \verb! -m!. If you are changing multiple files, you can use \verb!git add *!.
+
+
+\begin{remark}
+In general the file with the \verb!xourse! document class specifies
+course information such as the name of the course, a description of
+the course, and the names of all \LaTeX\ activity files comprising the
+course, in the order they should be presented to students.  In
+addition to a name and a description, \verb!anExampleCourse.tex!
+  above specifies that there is one activity file
+  \verb!theFirstActivity.tex!, written with or without the extension
+  \verb!.tex!, and located in a directory called
+  \verb!theFirstActivity!.  We will create this file and directory in
+  the following step.
+
+Generally courses should contain more than one activity. We recommend
+placing each activity in a directory of the same name.  This
+facilitates sharing activities among collaborators and makes reusing
+existing activities easier.
+%Later in this course, we will see examples of
+%how to borrow existing activities from other courses
+%rather than starting from scratch. 
+We also recommend that the directory and the \LaTeX\ file have exactly
+the same name as the title of the activity,
+with all spaces removed and all words other than the first word
+capitalized. So for example, if the title of the
+activity were \verb!Plants native to Ohio!
+the \LaTeX\ file \verb!plantsNativeToOhio.tex!
+would be located in a directory called
+\verb!plantsNativeToOhio!.
+\end{remark}
+
+\item Now create your first activity. In your terminal, move to the \verb!theFirstActivity!
+directory and create a file called \verb!theFirstActivity.tex!.
+This can be accomplished by
+executing the commands below.
+\begin{verbatim}
+
+cd theFirstActivity 
+touch theFirstActivity.tex
+\end{verbatim}
+
+\item\label{FirstExercise}
+Click ``Files" again and navigate to the (\verb!theFirstActivity!) folder, open \verb!theFirstActivity.tex!,
+and paste in the following text. Then save the file.
+\begin{verbatim}
+\documentclass{ximera}
+\title{The First Activity}
+\begin{document}
+\begin{abstract}
+This activity deals with Ximera activities.
+\end{abstract}
+\maketitle
+\end{document}
+\end{verbatim}
+
+\begin{remark}
+An activity should be composed as a regular
+\LaTeX\ file in the document class \verb!ximera!.
+It should contain the title of the activity and an abstract.
+These will both appear on the course website in the navigation area,
+so the abstract should be short.
+At this stage your activity contains
+a title and an abstract, but is otherwise blank.
+\end{remark}
+\item Now add this file to git and commit your changes. Back in the terminal, change to the directory \verb!anExampleCourse!
+ and execute the following commands
+\begin{verbatim}
+git add theFirstActivity.tex
+git commit -m "Added first activity file"
+\end{verbatim}
+
+
+
+
+\item Type \verb!xake bake! to compile the tex documents, then \verb!xake frost! to create a publication commit on top of your source commit. Finally type \verb!xake serve! to share your content with the world. For instance, my content will appear at https://ximera.osu.edu/turnloon/anExampleCourse
+
+
+\item This is a good point to add some further content in the
+  form of a simple exercise.  Update the file
+  \verb!theFirstActivity.tex!  you created above so that it looks like
+  the following.
+
+\begin{verbatim}
+\documentclass{ximera}
+\title{The First Activity}
+\begin{document}
+\begin{abstract}
+This activity deals with Ximera activities.
+\end{abstract}
+\maketitle
+This activity is about creative work.
+\begin{exercise}
+  Choose the best place to work on mathematics.
+  \begin{multipleChoice}
+    \choice{At the library}
+    \choice[correct]{At the caf\'e}
+    \choice{In your office}
+  \end{multipleChoice}
+\end{exercise}
+\end{document}
+\end{verbatim}
+\begin{remark}
+The edits above insert
+a multiple-choice question into the \verb!theFirstActivity!
+activity. See the {\sf Question and answer types}
+activity later in this tutorial
+for more information on creating exercises.
+\end{remark}
+
+\item Change to the directory \verb!anExampleCourse!
+  and execute the following commands.
+\begin{verbatim}
+git add theFirstActivity.tex
+git commit -m "Added an exercise"
+git push
+xake bake
+xake frost
+xake serve
+\end{verbatim}
+If everything went well, you should see a URL printed on the terminal.
+If not, see the {\sf Troubleshooting} activity in this tutorial or
+send your questions to
+\link[ximera@math.osu.edu]{mailto:ximera@math.osu.edu}.
+\begin{remark} The commands above inform 
+\link[git]{http://git-scm.com} that changes have been made to your
+repository and communicates them to
+\link[github.com]{http://github.com} which in turn communicates them
+to \link[ximera.osu.ed]{http://ximera.osu.edu}.  You should execute
+similar commands whenever you change files in your repository.
+\end{remark}
+\end{enumerate}
+
+\subsection{Creating further activities}
+From here you can create further \link[Ximera]{http://ximera.osu.edu}
+activities as in step~\autoref{FirstExercise}.  You should issue a
+\verb!git add! command after creating a new file or directory and a
+\verb!git commit!  command followed by a \verb!git push! command
+periodically to transmit your most recent changes to
+\link[github.com]{http://github.com}.  You should also add the name of
+your activity file to the \verb!xourse! file in the position relative
+to other activities where you want the activity to appear.  Observe
+however that once the filename appears in the \verb!xourse!  file the
+corresponding activity will appear to students. It might therefore be
+preferable to create a separate branch on GitHub until the activity is
+ready for students.  During the editing phase you still view the
+activity by processing it with \LaTeX\ and inspecting the resulting
+PDF file, which might be helpful in any case for finding and
+correcting mistakes.
+
+\subsection{Other ways to set up a Ximera repository}\label{ForkClone}
+There are other ways to create a \link[Ximera]{http://ximera.osu.edu}
+course.  One possibility is to begin by creating the repository on
+\link[github.com]{http://github.com}.  Then instead of executing the commands to
+initialize the local copy of the repository, you could {\em clone} the
+copy on \link[github.com]{http://github.com} using a \verb!git clone!
+  command.  Alternately you could {\em fork} an existing repository,
+  either your own or someone else's.  See the \link[git
+    manual]{http://git-scm.com} for more information about the
+  \verb!clone! and \verb!fork! commands.  Both possibilities above
+  obviate step \autoref{Mkdir} since cloning or forking a
+  \link[git]{http://git-scm.com} repository creates a local directory
+  and initializes it as a \link[git]{http://git-scm.com} repository.
+
+
+
+\end{document}
